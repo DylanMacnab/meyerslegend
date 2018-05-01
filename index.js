@@ -1,11 +1,13 @@
-console.log('index.js is starting');
+console.log('meyers legend is starting');
 
 var Twit = require('twit');
 
-var T = new Twit({
-  consumer_key:         'bsnAifZGURxqnrDkG8mueAzIR',
-  consumer_secret:      'lBhlxkmu0h3kcr7RB6H4W6aCaNqd9sKOKEWrClMasJrHPgYDCk',
-  access_token:         '990964059284553734-ZFw22bWtHJU6XWoyWQem97jfHKkvmY4',
-  access_token_secret:  'GQASgeoYzgtoV8Kla4Haa58UtzlIVJ5nMHHJAmQiFsIdS',
-  timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+var config = require('./config');
+var T = new Twit(config);
+
+// GET Example
+
+T.get('search/tweets', { q: 'donald trump', count: 3 }, function(err, data, response) {
+  var tweets = data.statuses[0].text;
+  console.log(tweets)
 });
