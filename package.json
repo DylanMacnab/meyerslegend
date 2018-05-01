@@ -1,0 +1,21 @@
+{
+  "name": "twitbot",
+  "version": "1.0.0",
+  "description": "practicing using npm and twitter api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twitter",
+    "bot",
+    "npm"
+  ],
+  "author": "Dylan Macnab",
+  "license": "ISC",
+  "dependencies": {
+    "npm": "^6.0.0",
+    "twit": "^2.2.9"
+  }
+}
