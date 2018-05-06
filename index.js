@@ -14,8 +14,54 @@ var T = new Twit(config);
 //   });
 // });
 
+/*
+// POST Example //
 
-// POST Example
-T.post('statuses/update', { status: 'this tweet is coming to you somewhere on spaceship earth.'}, function(err, data, response) {
-  console.log(data.text);
-});
+// run the tweet it once before it runs
+tweetIt();
+// run this tweetIt function at this interval
+setInterval(tweetIt, 1000*30);
+
+function tweetIt() {
+  var r = Math.floor(Math.random() * 100);
+  var tweet = {
+    status: `This is a random number: ${r}`
+  }
+  T.post('statuses/update', tweet, (err, data, response) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(tweet);
+    }
+  });
+}
+*/
+
+// STREAM Example
+
+// create stream
+var stream = T.stream('user');
+
+function followed(eventMsg) {
+  var name = eventMsg.source.name;
+  var screenName = eventMsg.source.screen_name;
+  tweetIt(name, screenName);
+}
+
+function tweetIt(name, screenName) {
+  var tweet = {
+    status: `@${screenName} thanks for following!`
+  }
+  T.post('statuses/update', tweet, (err, data, response) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(tweet);
+    }
+  });
+}
+
+// anytime someone follows me -- event handler on the stream with followed callback
+stream.on('follow', followed);
+
+
